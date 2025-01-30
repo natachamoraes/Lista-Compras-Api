@@ -1,12 +1,11 @@
 package List.Categoria.Entity;
 
-import org.hibernate.annotations.DynamicInsert;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -15,17 +14,18 @@ import lombok.NoArgsConstructor;
 
 @Data
 @Builder
-@DynamicInsert
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = false)
-@Entity(name = "CATEGORIA")
+@Entity
+@Table(name = "CATEGORIA")
 public class CategoriaModel {
 
     @Id
-    @Column(name = "ID", unique = false, nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "ID", nullable = false)
     private Long id;
 
-    @Column(name = "NOME")
+    @Column(name = "NOME", nullable = false, unique = true)
     private String nome;
 }
